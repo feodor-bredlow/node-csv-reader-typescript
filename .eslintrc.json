@@ -27,7 +27,10 @@
                 "ts": "never",
                 "tsx": "never"
             }
-        ]
+        ],
+        "no-tabs": "off",
+        "indent": "off",
+        "no-console": "off"
     },
     "settings": {
         "import/resolver": {
