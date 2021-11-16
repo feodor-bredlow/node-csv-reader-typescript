@@ -1,6 +1,11 @@
 import { ParsedQs } from 'qs';
 import extractUrlsFromQuery from './extractUrlsFromQuery';
 
+test('extractUrlsFromQuery to correctly return urls if only one "url" parameter is present', () => {
+    const queryObject: ParsedQs = { url: ['url0'] };
+    expect(extractUrlsFromQuery(queryObject)).toStrictEqual(['url0']);
+});
+
 test('extractUrlsFromQuery to correctly return urls if "url" parameter is present', () => {
     const queryObject: ParsedQs = { url: ['url0', 'url1', 'url2'], blob: 'foo' };
     expect(extractUrlsFromQuery(queryObject)).toStrictEqual(['url0', 'url1', 'url2']);

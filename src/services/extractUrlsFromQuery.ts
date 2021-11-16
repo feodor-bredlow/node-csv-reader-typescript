@@ -4,7 +4,9 @@ import { UrlParameters } from '../types/UrlParameters';
 const extractUrlsFromQuery = (query: ParsedQs): UrlParameters => {
     const urls = query.url;
 
-    if (urls) return urls as UrlParameters;
+    if (typeof urls === 'object') return urls as UrlParameters;
+    if (typeof urls === 'string') return [urls];
+
     return [];
 };
 
