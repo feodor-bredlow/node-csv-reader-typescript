@@ -1,6 +1,6 @@
 import fs from 'fs';
 import https from 'https';
-import { UrlParameters } from '../types/UrlParameters';
+import { UrlParameters } from '../types/types';
 import aggregateCSVs from './aggregateCSVs';
 
 const downloadCSVsPerRequest = (outerFolder: string, innderFolder: bigint, urls: UrlParameters) => {

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { UrlParameters } from '../types/UrlParameters';
+import { UrlParameters } from '../types/types';
 import downloadCSVsPerRequest from '../utils/downloadCSVsPerRequest';
 
 const downloadAndAggregateCSVs = (urls: UrlParameters): string => {
