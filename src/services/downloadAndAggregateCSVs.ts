@@ -13,7 +13,7 @@ const downloadAndAggregateCSVs = (urls: UrlParameters): string => {
     } else {
         downloadCSVsPerRequest(CSV_FILES, timeStamp, urls);
     }
-    return `${__dirname}/csv_files/timeStamp`;
+    return `${__dirname}/csv_files/${timeStamp}`;
 };
 
 export default downloadAndAggregateCSVs;
