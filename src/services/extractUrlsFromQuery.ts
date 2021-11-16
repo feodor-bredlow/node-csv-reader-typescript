@@ -1,5 +1,5 @@
 import { ParsedQs } from 'qs';
-import { UrlParameters } from '../types/UrlParameters';
+import { UrlParameters } from '../types/types';
 
 const extractUrlsFromQuery = (query: ParsedQs): UrlParameters => {
     const urls = query.url;
