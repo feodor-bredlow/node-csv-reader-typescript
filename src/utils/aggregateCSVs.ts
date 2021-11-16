@@ -1,7 +1,7 @@
 import fs from 'fs';
 import removeSpaces from './removeSpaces';
 
-const aggregateCSVs = (path: string, numberOfFiles: number) => {
+const aggregateCSVs = async (path: string, numberOfFiles: number) => {
     const firstLine = 'Redner,Thema,Datum,Wörter\n';
     fs.appendFile(`${path}/aggregated.csv`, firstLine, (error) => {
         if (error) { console.error('error :', error); } else {
