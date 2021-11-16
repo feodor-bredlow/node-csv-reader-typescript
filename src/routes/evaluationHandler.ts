@@ -1,23 +1,20 @@
 import express from 'express';
 import { UrlParameters } from '../types/UrlParameters';
 import extractUrlsFromQuery from '../services/extractUrlsFromQuery';
-import downloadCSVs from '../services/downloadCSVs';
+import downloadAndAggregateCSVs from '../services/downloadAndAggregateCSVs';
 
 export default express().get('/', (req, res) => {
-    console.log(req.query);
+    console.log('test', req.query);
 
     // 1. extract urls
     const urlParameters: UrlParameters = extractUrlsFromQuery(req.query);
+    console.log('request received for urls: ', urlParameters);
 
-    // 2. download CSVs
-    const csvPath = downloadCSVs(['https://fid-recruiting.s3-eu-west-1.amazonaws.com/politics.csv', 'https://fid-recruiting.s3-eu-west-1.amazonaws.com/politics.csv']);
+    // 2. download and aggregate CSVs
+    const csvFolderPath = downloadAndAggregateCSVs(urlParameters);
 
-    // 3. Aggregate information
+    // 3. evaluate data
+    // 4. return result
 
-    // step 2 and 3 could for improved efficiency also be merged into one step
-
-    // 4. evaluate data
-    // 5. return result
-
-    res.status(200).send('Hello evaluation from handler 2');
+    res.status(200).send('Hello evaluation from handler');
 });
