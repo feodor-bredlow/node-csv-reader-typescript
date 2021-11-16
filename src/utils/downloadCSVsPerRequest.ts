@@ -1,10 +1,10 @@
 import fs from 'fs';
 import https from 'https';
-import { UrlParameters } from '../types/types';
-import aggregateCSVs from './aggregateCSVs';
+import { UrlParameters } from '../types/UrlParameters';
+import createAggregatedFile from './createAggregatedFile';
 
 const downloadCSVsPerRequest = async (path: string, urls: UrlParameters): Promise<void> => {
-    const getRequestPromise = async (url: string, index: number): Promise<void> => new Promise((resolve) => {
+    const getRequest = async (url: string, index: number): Promise<void> => new Promise((resolve) => {
         https.get(url, (response) => {
             const writeStream = fs.createWriteStream(`${path}/csvData${index}.csv`);
             response.pipe(writeStream);
@@ -14,14 +14,14 @@ const downloadCSVsPerRequest = async (path: string, urls: UrlParameters): Promis
         });
     });
 
-    async function asyncGetCall(url: string, index: number) {
-        await getRequestPromise(url, index);
+    async function asyncDownload(url: string, index: number) {
+        await getRequest(url, index);
     }
 
     return Promise.all(
-        urls.map((url, index) => asyncGetCall(url, index)),
-    ).then(async () => {
-        aggregateCSVs(path, urls.length);
+        urls.map((url, index) => asyncDownload(url, index)),
+    ).then(() => {
+        createAggregatedFile(path);
     });
 };
 

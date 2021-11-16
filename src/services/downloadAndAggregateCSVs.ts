@@ -1,5 +1,7 @@
 import fs from 'fs';
+import { url } from 'inspector';
 import { UrlParameters } from '../types/types';
+import aggregateData from '../utils/aggregateData';
 import downloadCSVsPerRequest from '../utils/downloadCSVsPerRequest';
 
 const downloadAndAggregateCSVs = async (urls: UrlParameters): Promise<string> => {
@@ -14,8 +16,11 @@ const downloadAndAggregateCSVs = async (urls: UrlParameters): Promise<string> =>
     // 2. create timestamp subfolder for csv files of this request
     await fs.promises.mkdir(`${CSV_FILES}/${timeStamp}`).catch(console.error);
 
-    // 3. download CSVs per request into subfolder
+    // 3. download CSVs per request into subfolder and create aggregated file
     await downloadCSVsPerRequest(`${CSV_FILES}/${timeStamp}`, urls);
+
+    // 4. aggregate data of all CSV files in aggregated.csv
+    await aggregateData(`${CSV_FILES}/${timeStamp}`, urls);
 
     return `${__dirname}/csv_files/${timeStamp}`;
 };
