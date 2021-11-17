@@ -33,3 +33,10 @@ export type ApiResult = {
     mostSecurity: SpeakerName | null;
     leastWordy: SpeakerName | null;
 }
+
+export type csvRow = {
+    Redner: string;
+    Thema: string;
+    Datum: string;
+    Wörter: string;
+}
