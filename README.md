@@ -41,7 +41,7 @@ The provided urls are checked for their form and if at least one url is not in a
 1) clone repo
 2) cd node-csv-reader-typescript
 3) npm install
-4) add key/cert files to folder /__dirname/certs for encrypted https connection (eather by creating self-signed certificate or using one provided by a certificat authority)
+4) add cert.pem and key.pem files to folder /__dirname/dist/certs for configuring the encrypted https connection (eather by creating self-signed certificate or using one provided by a certificat authority)
 5) npm run start
 5b) alternatively: npm run dev for development (runs nodemon) 
 6) call http://localhost/evaluation&url=url1&... or https://localhost/evaluation&url=url1&...
