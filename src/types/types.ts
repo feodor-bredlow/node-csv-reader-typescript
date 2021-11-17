@@ -1,5 +1,10 @@
 export type UrlParameters = string[];
 
+export type UrlCheck = {
+    urls: UrlParameters;
+    allValid: boolean;
+}
+
 export type SpeakerName = string;
 
 export type Speech = {
