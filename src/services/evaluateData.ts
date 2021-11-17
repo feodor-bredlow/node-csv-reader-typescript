@@ -1,6 +1,7 @@
 import fs from 'fs';
 import csvParser from 'csv-parser';
-import { SpeakerEvaluationResult, SpeakerStats, ApiResult } from '../types/types';
+import { SpeakerStats, ApiResult } from '../types/types';
+import createApiResponse from './createApiResponse';
 
 const evaluateData = (path: string, callback: (result: ApiResult) => void) => {
     // const speakerMap: Map<string, Map<string, number>> = new Map();
@@ -35,43 +36,7 @@ const evaluateData = (path: string, callback: (result: ApiResult) => void) => {
             }
         })
         .on('end', () => {
-            const result: SpeakerEvaluationResult = {
-                mostSpeeches2013: { name: [''], result: 0 },
-                mostSecurity: { name: [''], result: 0 },
-                leastWordy: { name: [''], result: Number.MAX_SAFE_INTEGER },
-            };
-
-            speakerMap.forEach((speakerStats, speaker) => {
-                // update mostSpeeches
-                if (result.mostSpeeches2013.result < speakerStats.totalSpeeches2013) {
-                    result.mostSpeeches2013.result = speakerStats.totalSpeeches2013;
-                    result.mostSpeeches2013.name = [speaker];
-                } else if (result.mostSpeeches2013.result === speakerStats.totalSpeeches2013) {
-                    result.mostSpeeches2013.name.push(speaker);
-                }
-
-                // update mostSecurity
-                if (result.mostSecurity.result < speakerStats.securitySpeeches) {
-                    result.mostSecurity.result = speakerStats.securitySpeeches;
-                    result.mostSecurity.name = [speaker];
-                } else if (result.mostSecurity.result === speakerStats.securitySpeeches) {
-                    result.mostSecurity.name.push(speaker);
-                }
-
-                // update leastWordy
-                if (result.leastWordy.result > speakerStats.totalWords) {
-                    result.leastWordy.result = speakerStats.totalWords;
-                    result.leastWordy.name = [speaker];
-                } else if (result.leastWordy.result === speakerStats.totalWords) {
-                    result.leastWordy.name.push(speaker);
-                }
-            });
-
-            const apiResult: ApiResult = {
-                mostSpeeches: result.mostSpeeches2013.name.length === 1 ? result.mostSpeeches2013.name[0] : null,
-                mostSecurity: result.mostSecurity.name.length === 1 ? result.mostSecurity.name[0] : null,
-                leastWordy: result.leastWordy.name.length === 1 ? result.leastWordy.name[0] : null,
-            };
+            const apiResult = createApiResponse(speakerMap);
 
             callback(apiResult);
             console.log('request finished');
