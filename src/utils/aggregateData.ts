@@ -3,7 +3,7 @@ import removeSpaces from './removeSpaces';
 import { UrlParameters } from '../types/types';
 
 const aggregateData = async (path: string, urls: UrlParameters) => {
-    const postToAggregateFile = async (aPath: string, index: number): Promise<void> => new Promise((resolve) => {
+    const postToAggregateFile = async (index: number): Promise<void> => new Promise((resolve) => {
         let fileRowsNoSpace: string;
         fs.readFile(`${path}/csvData${index}.csv`, 'utf8', (err, data) => {
             if (err) {
@@ -19,12 +19,12 @@ const aggregateData = async (path: string, urls: UrlParameters) => {
         });
     });
 
-    async function asyncAggregate(aPath: string, index: number) {
-        await postToAggregateFile(aPath, index);
+    async function asyncAggregate(index: number) {
+        await postToAggregateFile(index);
     }
 
     return Promise.all(
-        urls.map((_, index) => asyncAggregate(path, index)),
+        urls.map((_, index) => asyncAggregate(index)),
     );
 };
 

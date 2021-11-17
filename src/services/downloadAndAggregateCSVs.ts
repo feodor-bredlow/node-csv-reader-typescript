@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { url } from 'inspector';
 import { UrlParameters } from '../types/types';
 import aggregateData from '../utils/aggregateData';
 import downloadCSVsPerRequest from '../utils/downloadCSVsPerRequest';

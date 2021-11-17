@@ -1,5 +1,4 @@
 import fs from 'fs';
-import removeSpaces from './removeSpaces';
 
 const createAggregatedFile = async (path: string) => {
     const firstLine = 'Redner,Thema,Datum,Wörter\n';

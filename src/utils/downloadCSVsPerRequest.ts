@@ -1,6 +1,6 @@
 import fs from 'fs';
 import https from 'https';
-import { UrlParameters } from '../types/UrlParameters';
+import { UrlParameters } from '../types/types';
 import createAggregatedFile from './createAggregatedFile';
 
 const downloadCSVsPerRequest = async (path: string, urls: UrlParameters): Promise<void> => {
