@@ -6,11 +6,15 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc && node .",
-    "dev": "tsc -w && nodemon .",
+    "dev": "tsc -w & nodemon .",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "license": "ISC",
+  "engines": {
+    "npm": ">=8.1.0",
+    "node": ">=16.13.0"
+  },
   "dependencies": {
     "csv-parser": "^3.0.0",
     "express": "^4.17.1",
