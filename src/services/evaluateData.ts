@@ -1,7 +1,7 @@
 import fs from 'fs';
 import csvParser from 'csv-parser';
 import { SpeakerStats, ApiResult } from '../types/types';
-import createApiResponse from './createApiResponse';
+import createApiResponse from '../utils/createApiResponse';
 
 const evaluateData = (path: string, callback: (result: ApiResult) => void) => {
     // const speakerMap: Map<string, Map<string, number>> = new Map();
